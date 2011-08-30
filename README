@@ -1,0 +1,7 @@
+This is just a quick hack to download and then delete old email from gmail.
+
+I couldn't find any simple command-line programs to do this when I googled
+for it, so I whipped one up. I'm releasing it so that the next person who
+wants to do this hopefully gets better search results :)
+
+--Chris
