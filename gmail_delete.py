@@ -30,6 +30,7 @@ class GmailArchiver:
 	username = ''
 	password = ''
 	hostname = 'imap.gmail.com'
+	folder   = 'INBOX'
 	mbox_filename = 'archive.mbox'
 	delete_p = False
 	
@@ -43,6 +44,8 @@ class GmailArchiver:
 		parser.add_argument('--days', nargs=1, type=int, default=None, help='Mail older than n days will be archived')
 		parser.add_argument('--date', nargs=1, default=None, help='Mail before DD-MMM-YYYY (eg 10-Apr-2010) will be archived')
 		parser.add_argument('--delete', default=False, help='Delete?')
+		parser.add_argument('--folder', default='INBOX', help='IMAP folder')
+		parser.add_argument('--mbox', default='archive.mbox', help='file to save mail to')
 		args = parser.parse_args()
 		
 		date = None
@@ -69,6 +72,9 @@ class GmailArchiver:
 		
 		if args.delete:
 			self.delete_p = True			
+		
+		self.folder = args.folder
+		self.mbox_filename = args.mbox
 			
 		self.archive(date)
 	
@@ -79,7 +85,7 @@ class GmailArchiver:
 		c = imaplib.IMAP4_SSL(self.hostname)
 		c.debug = 1
 		c.login(self.username, self.password)
-		c.select('INBOX')
+		c.select(self.folder)
 		
 		t, [ids] = c.search(None, 'BEFORE', date)
 		
