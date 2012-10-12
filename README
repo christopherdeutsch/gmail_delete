@@ -4,4 +4,12 @@ I couldn't find any simple command-line programs to do this when I googled
 for it, so I whipped one up. I'm releasing it so that the next person who
 wants to do this hopefully gets better search results :)
 
---Chris
+Example usage:
+
+Use the --days option to archive everything older than 30 days:
+
+	gmail_delete.py --delete=true --days=30 --mbox=archive.mbox --username=<user>
+
+Use the --purge flag to delete everything in a folder without archiving it:
+
+	gmail_delete.py --purge=true --folder='[Gmail]/Trash' --username=<user> --password=<password>
